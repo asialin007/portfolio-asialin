@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>林亚洲 - UX 设计师 | 用户体验设计作品集</title>
+  <meta name="description" content="林亚洲 - 9年用户体验设计经验，专注于创造直观、美观且富有同理心的数字产品体验" />
+  <link rel="icon" href="data:," />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#ffffff",
+            cream: "#f7fafc",
+            ink: "#000000",
+            graphite: "#0f0f0f",
+            slate: "#1e1e1e",
+            ash: "#8d8d8d",
+            button: "#0d111b",
+            teal: "#0098f2",
+            pink: "#f200ca",
+            violet: "#6d56fc"
+          },
+          fontFamily: {
+            runde: ["Inter", "ui-rounded", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+            ui: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"]
+          },
+          boxShadow: {
+            hairline: "rgba(0,0,0,0.06) 0px 2.5px 2.5px 0px",
+            button: "rgb(36,38,40) 0px 0px 0px 1px, rgba(27,28,29,0.48) 0px 1px 2px 0px"
+          }
+        }
+      }
+    };
+  </script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: #000000;
+      font-family: Inter, ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-feature-settings: "cv03" 1, "cv04" 1, "cv09" 1, "cv11" 1;
+    }
+    .blueprint {
+      background-image:
+        linear-gradient(rgba(0,152,242,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,152,242,0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const navItems = [
+      ["关于", "#about"],
+      ["技能", "#skills"],
+      ["项目", "#projects"],
+      ["联系", "#contact"]
+    ];
+
+    const stats = [
+      { num: "9+", label: "年设计经验", desc: "长期打磨 App、电商与复杂业务体验", type: "timeline" },
+      { num: "UX", label: "专业领域", desc: "研究、交互、视觉与设计系统协同", type: "cards" },
+      { num: "IF", label: "概念设计奖", desc: "以清晰问题定义驱动高质量方案", type: "award" },
+      { num: "∞", label: "持续学习", desc: "把新工具转化成更稳定的设计产出", type: "loop" }
+    ];
+
+    const skillGroups = [
+      ["设计能力", ["用户研究", "交互设计", "视觉设计", "原型设计", "设计系统", "可用性测试"]],
+      ["设计工具", ["Figma", "Sketch", "Principle", "Axure", "Photoshop"]],
+      ["协作方法", ["HTML/CSS", "团队协作", "项目管理", "数据分析"]]
+    ];
+
+    const projects = [
+      {
+        title: "唯品会设计系统 3.0 搭建",
+        meta: "Design System / E-commerce",
+        desc: "负责唯品会电商 App 交互设计，打造流畅直观界面，优化购物流程与用户体验。与多团队合作，通过用户研究提升 App 易用性和转化率。",
+        tags: ["设计系统", "组件库", "Figma"],
+        accent: "bg-teal"
+      },
+      {
+        title: "4399 直播 App 搭建",
+        meta: "Mobile App / Live Streaming",
+        desc: "主导游戏直播产品体验设计，包括界面布局、功能流程和交互细节。协调设计与开发团队，确保产品顺利开发和迭代。",
+        tags: ["App 设计", "直播", "交互设计"],
+        accent: "bg-violet"
+      },
+      {
+        title: "商详页改版设计",
+        meta: "Conversion / Product Detail",
+        desc: "负责电商商品详情页改版，通过用户研究和数据分析优化页面布局，并运用 A/B 测试验证方案，提升购物体验和转化效率。",
+        tags: ["App 改版", "电商", "用户体验"],
+        accent: "bg-pink"
+      }
+    ];
+
+    function ArrowIcon({ className = "h-4 w-4" }) {
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      );
+    }
+
+    function CheckIcon() {
+      return (
+        <svg className="h-4 w-4 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      );
+    }
+
+    function Navigation() {
+      return (
+        <header className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/88 backdrop-blur-xl">
+          <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 md:px-8">
+            <a href="#" className="flex items-center gap-3 text-[15px] font-semibold text-ink">
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-button text-sm text-white shadow-button">林</span>
+              <span>林亚洲</span>
+            </a>
+            <div className="hidden items-center gap-8 md:flex">
+              {navItems.map(([label, href]) => (
+                <a key={label} href={href} className="text-sm font-medium text-ash transition hover:text-ink">
+                  {label}
+                </a>
+              ))}
+            </div>
+            <a href="#contact" className="rounded-full bg-button px-4 py-2 text-sm font-medium text-white shadow-button transition hover:bg-ink">
+              联系我
+            </a>
+          </nav>
+        </header>
+      );
+    }
+
+    function HeroVisual() {
+      return (
+        <div className="relative mx-auto mt-12 max-w-[980px] md:mt-16">
+          <div className="absolute -left-4 top-10 hidden h-28 w-28 rounded-[32px] border border-black/10 bg-cream p-4 md:block">
+            <div className="h-full rounded-3xl bg-white shadow-hairline">
+              <div className="mx-auto mt-5 h-2 w-14 rounded-full bg-teal" />
+              <div className="mx-auto mt-3 h-2 w-10 rounded-full bg-black/15" />
+              <div className="mx-auto mt-3 h-2 w-16 rounded-full bg-black/10" />
+            </div>
+          </div>
+          <div className="absolute -right-5 bottom-8 hidden h-24 w-24 rounded-full border border-black/10 bg-white shadow-hairline md:grid md:place-items-center">
+            <span className="h-3 w-3 rounded-full bg-pink" />
+            <span className="absolute h-12 w-px rotate-45 bg-black/10" />
+            <span className="absolute h-12 w-px -rotate-45 bg-black/10" />
+          </div>
+          <div className="overflow-hidden rounded-[32px] border border-black/10 bg-white shadow-hairline">
+            <div className="grid border-b border-black/10 bg-cream px-5 py-3 md:grid-cols-[1fr_auto]">
+              <div className="flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-pink" />
+                <span className="h-2.5 w-2.5 rounded-full bg-violet" />
+                <span className="h-2.5 w-2.5 rounded-full bg-teal" />
+              </div>
+              <span className="mt-3 text-xs text-ash md:mt-0">Portfolio case overview</span>
+            </div>
+            <div className="grid gap-0 md:grid-cols-[1.05fr_.95fr]">
+              <div className="blueprint p-6 md:p-10">
+                <p className="text-xs font-medium uppercase text-ash">Selected design work</p>
+                <div className="mt-6 rounded-[20px] border border-black/10 bg-white p-6 shadow-hairline">
+                  <div className="flex items-start justify-between gap-6">
+                    <div>
+                      <p className="text-sm text-ash">Experience audit</p>
+                      <h3 className="mt-2 text-2xl font-semibold text-ink">电商关键路径体验优化</h3>
+                    </div>
+                    <span className="rounded-full bg-teal px-3 py-1 text-xs font-medium text-white">Live</span>
+                  </div>
+                  <div className="mt-8 grid gap-3">
+                    <div className="h-3 w-full rounded-full bg-black/10" />
+                    <div className="h-3 w-4/5 rounded-full bg-black/10" />
+                    <div className="h-3 w-2/3 rounded-full bg-black/10" />
+                  </div>
+                  <div className="mt-8 grid grid-cols-3 gap-3">
+                    {["研究", "策略", "交付"].map((item) => (
+                      <div key={item} className="rounded-2xl border border-black/10 bg-cream p-4 text-center text-sm font-medium text-graphite">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="border-t border-black/10 p-6 md:border-l md:border-t-0 md:p-10">
+                <div className="space-y-5">
+                  {["用户洞察沉淀", "组件规范统一", "业务指标验证"].map((item, index) => (
+                    <div key={item} className="flex items-center gap-4 rounded-[20px] border border-black/10 bg-white p-4 shadow-hairline">
+                      <span className="grid h-9 w-9 place-items-center rounded-full bg-cream text-sm font-semibold text-ink">0{index + 1}</span>
+                      <div>
+                        <p className="text-sm font-semibold text-ink">{item}</p>
+                        <p className="text-xs text-ash">Structured and reviewable</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function Hero() {
+      return (
+        <section className="blueprint px-5 pb-20 pt-32 md:px-8 md:pb-28 md:pt-36">
+          <div className="mx-auto max-w-[1200px] text-center">
+            <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-medium text-graphite shadow-hairline">
+              <span className="h-2 w-2 rounded-full bg-teal" />
+              开放接受新机会
+            </div>
+            <h1 className="mx-auto mt-8 max-w-[900px] text-5xl font-semibold leading-[1.08] text-ink md:text-6xl lg:text-[64px]">
+              HI～我是林亚洲
+            </h1>
+            <p className="mx-auto mt-6 max-w-[680px] text-base font-medium leading-8 text-slate md:text-lg">
+              9 年用户体验设计经验，关注用户研究、交互设计、视觉表达与设计系统落地。用更清晰的结构、更稳定的规范，帮助产品体验和业务目标一起向前。
+            </p>
+            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a href="#projects" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-button px-5 py-3 text-sm font-medium text-white shadow-button transition hover:bg-ink sm:w-auto">
+                查看作品 <ArrowIcon />
+              </a>
+              <a href="#about" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-medium text-graphite transition hover:border-black/30 sm:w-auto">
+                了解经历
+              </a>
+            </div>
+            <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-medium text-graphite">
+              {["设计系统", "App 体验", "电商转化"].map((item) => (
+                <span key={item} className="inline-flex items-center gap-2"><CheckIcon />{item}</span>
+              ))}
+            </div>
+            <HeroVisual />
+          </div>
+        </section>
+      );
+    }
+
+    function SectionTitle({ eyebrow, title, desc }) {
+      return (
+        <div className="mb-10 max-w-[720px]">
+          <p className="mb-3 text-xs font-medium uppercase text-ash">{eyebrow}</p>
+          <h2 className="text-3xl font-semibold leading-tight text-ink md:text-[40px]">{title}</h2>
+          {desc && <p className="mt-4 text-base font-medium leading-8 text-slate">{desc}</p>}
+        </div>
+      );
+    }
+
+    function StatVisual({ type }) {
+      if (type === "timeline") {
+        return (
+          <div className="relative h-28 w-32 overflow-hidden rounded-[28px] border border-black/10 bg-cream p-4 md:h-36 md:w-40">
+            <div className="absolute left-6 top-5 h-[calc(100%-40px)] w-px bg-black/10" />
+            {[0, 1, 2].map((item) => (
+              <div key={item} className="relative z-10 mb-4 flex items-center gap-3">
+                <span className={`h-3 w-3 rounded-full ${item === 0 ? "bg-teal" : "bg-white ring-1 ring-black/15"}`} />
+                <span className="h-2 flex-1 rounded-full bg-black/10" />
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      if (type === "cards") {
+        return (
+          <div className="relative h-28 w-32 md:h-36 md:w-40">
+            <div className="absolute right-0 top-0 h-24 w-24 rounded-[24px] border border-black/10 bg-cream md:h-32 md:w-32" />
+            <div className="absolute bottom-0 left-0 h-24 w-28 rounded-[24px] border border-black/10 bg-white p-4 shadow-hairline md:h-32 md:w-36">
+              <div className="h-3 w-12 rounded-full bg-teal" />
+              <div className="mt-5 grid grid-cols-2 gap-2">
+                <span className="h-8 rounded-2xl bg-black/10" />
+                <span className="h-8 rounded-2xl bg-black/5" />
+                <span className="h-8 rounded-2xl bg-black/5" />
+                <span className="h-8 rounded-2xl bg-black/10" />
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (type === "award") {
+        return (
+          <div className="relative h-28 w-32 overflow-hidden rounded-[28px] border border-black/10 bg-cream md:h-36 md:w-40">
+            <div className="absolute inset-x-5 top-5 rounded-[22px] border border-black/10 bg-white p-4 shadow-hairline">
+              <div className="mx-auto h-11 w-11 rounded-full border-[6px] border-teal bg-white" />
+              <div className="mx-auto mt-4 h-2 w-16 rounded-full bg-black/10" />
+            </div>
+            <div className="absolute bottom-4 left-1/2 h-12 w-8 -translate-x-1/2 bg-button [clip-path:polygon(50%_100%,0_0,100%_0)]" />
+          </div>
+        );
+      }
+
+      return (
+        <div className="relative h-28 w-32 overflow-hidden rounded-[28px] border border-black/10 bg-cream p-4 md:h-36 md:w-40">
+          <div className="absolute inset-4 rounded-[24px] border border-black/10 bg-white shadow-hairline" />
+          <svg className="relative z-10 h-full w-full text-teal" viewBox="0 0 160 130" fill="none">
+            <path d="M35 65c18-34 45-34 63 0s45 34 63 0" stroke="currentColor" strokeWidth="10" strokeLinecap="round" />
+            <path d="M35 65c18 34 45 34 63 0s45-34 63 0" stroke="#0d111b" strokeWidth="10" strokeLinecap="round" />
+          </svg>
+        </div>
+      );
+    }
+
+    function About() {
+      return (
+        <section id="about" className="scroll-mt-24 bg-white px-5 py-20 md:px-8 md:py-24">
+          <div className="mx-auto max-w-[1200px]">
+            <SectionTitle
+              eyebrow="About"
+              title="把研究、结构与细节放在同一个工作台上。"
+              desc="我目前在广州工作，长期参与移动端产品和电商业务体验建设。设计判断从用户问题开始，也会落到可复用的规范、组件和验证方式里。"
+            />
+            <div className="grid gap-5 md:grid-cols-2">
+              {stats.map((stat) => (
+                <article key={stat.label} className="grid min-h-[190px] grid-cols-[1fr_auto] items-center gap-5 overflow-hidden rounded-[28px] border border-black/10 bg-white p-6 shadow-hairline transition hover:border-teal/40 md:min-h-[220px] md:p-8">
+                  <div>
+                    <div className="text-[48px] font-semibold leading-none text-ink md:text-[64px]">{stat.num}</div>
+                    <h3 className="mt-5 text-lg font-semibold text-graphite">{stat.label}</h3>
+                    <p className="mt-3 max-w-[260px] text-sm font-medium leading-6 text-ash md:text-base md:leading-7">{stat.desc}</p>
+                  </div>
+                  <StatVisual type={stat.type} />
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Skills() {
+      return (
+        <section id="skills" className="scroll-mt-24 bg-cream px-5 py-20 md:px-8 md:py-24">
+          <div className="mx-auto max-w-[1200px]">
+            <SectionTitle
+              eyebrow="Skills"
+              title="专业技能与工具"
+              desc="保持信息层级克制、清楚、可扫描，让作品集本身也像一份整理干净的设计交付物。"
+            />
+            <div className="grid gap-5 md:grid-cols-3">
+              {skillGroups.map(([title, items]) => (
+                <article key={title} className="rounded-[20px] border border-black/10 bg-white p-6 shadow-hairline">
+                  <h3 className="text-xl font-semibold text-ink">{title}</h3>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {items.map((item) => (
+                      <span key={item} className="rounded-full border border-black/10 bg-white px-3 py-2 text-sm font-medium text-graphite">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Projects() {
+      return (
+        <section id="projects" className="scroll-mt-24 bg-white px-5 py-20 md:px-8 md:py-24">
+          <div className="mx-auto max-w-[1200px]">
+            <SectionTitle
+              eyebrow="Projects"
+              title="精选作品"
+              desc="每个项目都尽量用简洁的结构表达问题、角色和价值，避免用装饰掩盖设计判断。"
+            />
+            <div className="grid gap-5">
+              {projects.map((project, index) => (
+                <article key={project.title} className="grid overflow-hidden rounded-[20px] border border-black/10 bg-white shadow-hairline md:grid-cols-[.72fr_1.28fr]">
+                  <div className="blueprint border-b border-black/10 p-6 md:border-b-0 md:border-r md:p-8">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium uppercase text-ash">{project.meta}</span>
+                      <span className={`h-3 w-3 rounded-full ${project.accent}`} />
+                    </div>
+                    <div className="mt-12 text-[56px] font-semibold leading-none text-ink">0{index + 1}</div>
+                    <div className="mt-8 h-2 w-full rounded-full bg-black/10">
+                      <div className={`h-2 rounded-full ${project.accent}`} style={{ width: `${72 + index * 8}%` }} />
+                    </div>
+                  </div>
+                  <div className="p-6 md:p-8">
+                    <h3 className="text-2xl font-semibold leading-tight text-ink md:text-[32px]">{project.title}</h3>
+                    <p className="mt-5 text-base font-medium leading-8 text-slate">{project.desc}</p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="rounded-full bg-cream px-3 py-2 text-sm font-medium text-graphite">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <a href="#" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-teal transition hover:text-ink">
+                      查看详情 <ArrowIcon />
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Contact() {
+      const links = [
+        ["Email", "mailto:your@email.com"],
+        ["GitHub", "https://github.com/yourusername"],
+        ["LinkedIn", "https://linkedin.com/in/yourusername"],
+        ["Twitter", "https://twitter.com/yourusername"]
+      ];
+
+      return (
+        <section id="contact" className="scroll-mt-24 bg-cream px-5 py-20 md:px-8 md:py-24">
+          <div className="mx-auto max-w-[1200px] rounded-[32px] border border-black/10 bg-white p-8 text-center shadow-hairline md:p-14">
+            <p className="text-xs font-medium uppercase text-ash">Contact</p>
+            <h2 className="mx-auto mt-4 max-w-[760px] text-3xl font-semibold leading-tight text-ink md:text-[40px]">
+              让我们把下一个产品体验整理得更清楚。
+            </h2>
+            <p className="mx-auto mt-5 max-w-[620px] text-base font-medium leading-8 text-slate">
+              无论是产品体验优化、设计系统建设，还是一个需要从模糊走向清晰的项目，都欢迎联系我。
+            </p>
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+              {links.map(([label, href]) => (
+                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} className="inline-flex items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-medium text-graphite transition hover:border-teal hover:text-teal">
+                  {label} <ArrowIcon />
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function App() {
+      return (
+        <>
+          <Navigation />
+          <main>
+            <Hero />
+            <About />
+            <Skills />
+            <Projects />
+            <Contact />
+          </main>
+          <footer className="border-t border-black/5 bg-white px-5 py-8 text-center text-sm font-medium text-ash">
+            © 2026 林亚洲. 用设计创造更好的用户体验
+          </footer>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
